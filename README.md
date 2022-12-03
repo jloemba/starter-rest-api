@@ -1,34 +1,29 @@
-# Starter REST Api
+# API | EPE-M Worship Library
 
-This is an example REST Api designed to be deployed on Cyclic.sh
+##  Installation
 
-[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
-
-
-## Examples
-
-### Create/Update - Insert/Upsert
-
-```shell
-curl -i https://localhost:3000/animals/rin%20tin%20tin \
-    --data '{"breed":"German Shepard", "gender": "male"}' \
-    -XPOST -H 'Content-Type: application/json'
+Lancer l'appli avec la commande
+```
+docker-compose up
 ```
 
-### Read All - List
-
-```shell
-curl -i https://localhost:3000/animals
+Lancer la base de données
+```
+sudo docker-compose run app npm install sequelize
+sudo docker-compose run app npx sequelize-cli db:migrate
 ```
 
-### Read
+Vos tables seront normalement crées en base de données.
 
-```shell
-curl -i https://localhost:3000/animals/lassy
+Les clients suivants suivants seront disponibles aux ports suivants :
+
+- L'API Node : port 8085
+- Adminer: port 8080
+
+
+Insérer des valeurs de tests en base de données : 
+
+```
+docker-compose run app npx sequelize db:seed:all
 ```
 
-### Delete
-
-```shell
-curl -i -XDELETE https://localhost:3000/animals/lassy
-```
