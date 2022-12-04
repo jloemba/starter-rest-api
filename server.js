@@ -7,6 +7,7 @@ const lyrics = require('./routes/lyrics');
 const part = require('./routes/part');
 const song = require('./routes/song');
 const user = require('./routes/user');
+const health = require('./routes/health');
 
 // Constants
 const PORT = 8085;
@@ -46,6 +47,7 @@ app.use('/lyrics', lyrics);
 app.use('/part', part);
 app.use('/song', song);
 app.use('/user', user);
+app.use('/health', health);
 
 app.listen(PORT);
 console.log(`Running on port ${PORT}`);
