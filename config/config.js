@@ -9,7 +9,6 @@ const config = {
       ssl: true,
     }
   }
-}
 };
 
 module.exports = config;
