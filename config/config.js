@@ -4,9 +4,12 @@ const config = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
-    dialect: "postgres",
-    ssl: true
-  },
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    }
+  }
+}
 };
 
 module.exports = config;
