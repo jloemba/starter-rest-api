@@ -33,7 +33,7 @@ module.exports = {
                 Song.findOne({where:{title:req.body.title}})
                 .then(result=>{
                     if(result) {
-                        res.status(409).json({message:"Existe déjà")
+                        res.status(409).json({message:"Existe déjà"})
                     }
                     else Song.create({ title: req.body.title }).then(data => res.status(200).json(data))
                 })
