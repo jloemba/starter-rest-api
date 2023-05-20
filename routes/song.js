@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const songController = require('../controllers/song');
-const verifyToken = require('../utils/verifyToken');
+const verifyToken = require('../services/utils/verifyToken');
 
 router.get('/',verifyToken, songController.getAll);
 router.get('/single',verifyToken, songController.getOne);

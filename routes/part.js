@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const partController = require('../controllers/part');
-const verifyToken = require('../utils/verifyToken');
+const verifyToken = require('../services/utils/verifyToken');
 
 router.get('/',verifyToken, partController.getAll);
 router.get('/single',verifyToken, partController.getOne);
