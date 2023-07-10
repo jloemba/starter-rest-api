@@ -1,22 +1,31 @@
 const User = require("../models").User;
 var jwt = require("jsonwebtoken");
-//const { notifyRegistration } = require("../services/mailer");
+const { notifyAfterRegistration } = require("../services/mailer");
 
 module.exports = {
   register: function (req, res, next) {
     try {
       if (req.body.email) {
         User.findOne({ where: { email: req.body.email } }).then((result) => {
-          console.log(result);
           if (result) res.status(409).json({ message: "existe déjà" });
           else {
-            const { email } = req.body;
+            let { email } = req.body;
             User.create({
               email: email,
               isAdmin: false,
               isActived: false,
             }).then((createdUser) => {
               res.status(201).json(createdUser);
+            });
+            User.findAll({
+              where: { isActived: true, levelAccess: "Administrateur" },
+              attributes: ["email"],
+            }).then((adminUsers) => {
+              let adminUserList = [];
+              adminUsers.forEach((element) =>
+                adminUserList.push(element.dataValues.email)
+              );
+              notifyAfterRegistration(email, adminUserList);
             });
           }
         });
@@ -55,7 +64,6 @@ module.exports = {
   enableOrDisableUserAccount: function (req, res, next) {
     try {
       User.findOne({ where: { id: req.body.userId } }).then((foundUser) => {
-
         if (foundUser) {
           foundUser.update({ isActived: req.body.actived }).then((response) => {
             res.status(200).json({
