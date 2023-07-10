@@ -22,9 +22,9 @@ module.exports = {
               attributes: ["email"],
             }).then((adminUsers) => {
               let adminUserList = [];
-              adminUsers.forEach((element) =>
-                adminUserList.push(element.dataValues.email)
-              );
+              adminUsers.forEach((element) => {
+                adminUserList.push(element.dataValues.email);
+              });
               notifyAfterRegistration(email, adminUserList);
             });
           }
