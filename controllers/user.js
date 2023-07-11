@@ -23,8 +23,10 @@ module.exports = {
             }).then((adminUsers) => {
               let adminUserList = [];
               adminUsers.forEach((element) => {
+                console.log('response',element.dataValues.email)
                 adminUserList.push(element.dataValues.email);
               });
+              console.log('array',adminUserList)
               notifyAfterRegistration(email, adminUserList);
             });
           }
